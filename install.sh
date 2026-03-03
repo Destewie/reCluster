@@ -3566,7 +3566,8 @@ EOF
   # Setup server
   INFO "Setting up server"
   DEBUG "Installing server dependencies"
-  $SUDO npm --prefix "$_server_dir" ci --ignore-scripts
+  #$SUDO npm --prefix "$_server_dir" ci --ignore-scripts
+  $SUDO npm --prefix "$_server_dir" install --legacy-peer-deps --ignore-scripts
   yes | $SUDO cp --force "$_server_env_file" "$_server_dir/.env"
   DEBUG "Generating database assets"
   $SUDO npm --prefix "$_server_dir" run db:generate
