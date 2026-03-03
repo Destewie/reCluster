@@ -415,10 +415,10 @@ download() {
   DEBUG "Downloading file '$2' to '$1'"
   case $DOWNLOADER in
   curl)
-    curl --fail --silent --location --output "$1" "$2" || FATAL "Download file '$2' failed"
+    curl --fail --silent --location --output "$1" "$2" || FATAL "Download file '$2' via curl failed"
     ;;
   wget)
-    wget --quiet --output-document="$1" "$2" || FATAL "Download file '$2' failed"
+    wget --quiet --output-document="$1" "$2" || FATAL "Download file '$2' via wget failed"
     ;;
   *) FATAL "Unknown downloader '$DOWNLOADER'" ;;
   esac
