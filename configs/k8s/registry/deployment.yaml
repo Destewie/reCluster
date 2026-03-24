@@ -1,0 +1,126 @@
+# MIT License
+#
+# Copyright (c) 2022-2023 Carlo Corradini
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: registry-system
+
+---
+apiVersion: v1
+kind: Secret
+type: kubernetes.io/tls
+metadata:
+  name: registry-secret
+  namespace: registry-system
+data:
+  tls.crt: 'LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZaekNDQTArZ0F3SUJBZ0lVTjdXeUJVZklydWc1TWlXRDJ2bjdFNUw3R2pjd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0l6RWhNQjhHQTFVRUF3d1ljbVZuYVhOMGNua3VjbVZqYkhWemRHVnlMbXh2WTJGc01CNFhEVEUzTURFdwpNVEF3TWprME1Wb1hEVEkyTVRJek1EQXdNamswTVZvd0l6RWhNQjhHQTFVRUF3d1ljbVZuYVhOMGNua3VjbVZqCmJIVnpkR1Z5TG14dlkyRnNNSUlDSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQWc4QU1JSUNDZ0tDQWdFQXR0SisKVWRNYzYrLzJxcVBSKzljeWt0cFNYVzBUclJtTXJtMmh3OUJZUGtuaUJoQkdFdWlyOVo2dkg0YjBNZExGV3dMQwpqYzJtZWllK3htMEpUb3hNcEF3T01NNVRHUW82aWJOVHNTaXJzZ21Xamo4R1Q3YmRBSm5XL1dnUTJXK1pwWlh6CnNhN0x3czVYQk9wK0JyemFka2prRWhNaElxeWRRNWl5S1lvVGltWlVOck9pdHVDQWYwQ25GbDQvL0gwQlkxNlkKc3RUQWNjN3JVOXhFaVBiS0NiM2NscUg2bUl6NGJZQ1VkVHdCQVlzNzQ3VFBnaFJlWUlmZmxyeG03bU9MNllzeQo2WkwxQ2NYU3Z2NW1ITVBjQ1M2elBDQVUzSGgyQlVCYkVsS1dpeTZUc0FkVzB4TXNiZ1gvRVhzd0FLUkxqUkdOCllkK0NTbkRHTTBTRG9ONDkxSjlDSDFGNzkrbW50VFIzY2gxdjFVdlp3N1VJS1dVNy9wMUFQTnRrUkhQbS9TRVUKdWhZcU5hZk11ekdtcnlpYjNtcDVlRnRKR0YrWFIwSjI2TW9CazZickFFVEUvdlozU2ViR28wRXpmZkFhN1paZgpYSk9GZHUyd1UydVVDTFQzRG1EaWtscG1ZTzcyejc0UGdKQ2xqc3c5Q1hYWG92Q1JHOXpsVVJnR3VQTzBxTVVNCldERDZ2VnFPSURwbDVVSENCNzJ4WUNQR01HUy84K2JFalk4V1lkZXJ4WEVmcmtFanljZGwyNDNwcm9HVC9qMk4KYS9WRldMUnJwSjZWME55NzhYcDBBVEZMYlgyK0pjc1JYRHhZbXNlcUZZMXN4cUhkYXVZN2RlNk1RU0xkZ3lTdApmVTRjRU5sQ2oweDh1M0lYbzczMjBES3FlSDY2TGdHWWc0MnhqeGtDQXdFQUFhT0JrakNCanpBZEJnTlZIUTRFCkZnUVVyUjJ2SWgyK3lnK1JkanBCZGFoS0J6WGVkcmd3SHdZRFZSMGpCQmd3Rm9BVXJSMnZJaDIreWcrUmRqcEIKZGFoS0J6WGVkcmd3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekE4QmdOVkhSRUVOVEF6Z2hoeVpXZHBjM1J5ZVM1eQpaV05zZFhOMFpYSXViRzlqWVd5Q0VTb3VjbVZqYkhWemRHVnlMbXh2WTJGc2h3VEFxQUxITUEwR0NTcUdTSWIzCkRRRUJDd1VBQTRJQ0FRQmQrMjA1SmRqaDg3S1BxL0htMWpHb0NwTDNoOWtuK0tJdjdyMElLbEkrK05hUktmclcKNWplZWdqOVF0STE4eEdNRVA1TU4xMTM0YkVtNWpHdlBRTk50U1RkL3JBakk3YlM1Z0habDl0ZXl5QVhRT1UzSQorNHB5VWhxVjBjU0JGUlk4aHF6Ui9WM091L3lkZDlXL0dsOVBNNm9oZGJsbkpxUnFWT2dBcWdzUlJyS3lBQmVjCmpEZzQ3angvRWh2WjY4K25XeXZYenFneVFlQ0FadkN5dHZ6bXBEc3dIQWRUNnpESHRGRTNMVkhQSmxTbXBxSWcKYVBNQnR6UTBPd2o5RElUdUd3cVVtUDJUaVQ3elk2M1hRSzhOcEtNYjl1NG9RM2RWVW4raFNCMGNvMW5VSFhHTQpLdGlwbUVFa2xKMGFwQ2czblhPNXp4eWRKdFFJK1RiUmExTkNNWWdKUGNhQjZ2MkVSanJlYVFGUGhuVzNXTzZXCjM2OGYyeFl6VTJWdi9lNlI2SnU0bm1BMUNYTXgxNmRVZDV6RHZFQzRONmpRSUIrVnBMNEtWdHFwTXBRckY1VDQKdUF6VkJKTVc1RkhiT29ZQi9NbWk3U1R1U3BZMnBMSmFaKzdyRWRCR2VOUldFZVFLeThkeFN0TVB1RkI5cWtvZApHS1FVWGJBajh2UHFzMGloUXNlRTBrTVhnb0RVM0pHcHRISU5JbVJjNkFmb0NpWXF6LzdjU29RWEh6cm8xL1MvCmdEUHI4U3FkbEVzNEpTVCtiWFoxSWxzVVFWTUR6N1d3VGxxTnpXTXVuZi9wTjFxZXZ4OTVIcDBFQnJkcHRWdHUKRHZ6dGUxTG0yZ1pzWHZFSzVjNmlGWkRlMmFUZnZuK1JMNitCcWkyd2g3bmtBUHdVRktCelMza09pUT09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K'
+  tls.key: 'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUpRUUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQ1Nzd2dna25BZ0VBQW9JQ0FRQzIwbjVSMHh6cjcvYXEKbzlINzF6S1MybEpkYlJPdEdZeXViYUhEMEZnK1NlSUdFRVlTNkt2MW5xOGZodlF4MHNWYkFzS056YVo2Sjc3RwpiUWxPakV5a0RBNHd6bE1aQ2pxSnMxT3hLS3V5Q1phT1B3WlB0dDBBbWRiOWFCRFpiNW1sbGZPeHJzdkN6bGNFCjZuNEd2TnAyU09RU0V5RWlySjFEbUxJcGloT0tabFEyczZLMjRJQi9RS2NXWGovOGZRRmpYcGl5MU1CeHp1dFQKM0VTSTlzb0p2ZHlXb2ZxWWpQaHRnSlIxUEFFQml6dmp0TStDRkY1Z2g5K1d2R2J1WTR2cGl6THBrdlVKeGRLKwovbVljdzl3SkxyTThJQlRjZUhZRlFGc1NVcGFMTHBPd0IxYlRFeXh1QmY4UmV6QUFwRXVORVkxaDM0SktjTVl6ClJJT2czajNVbjBJZlVYdjM2YWUxTkhkeUhXL1ZTOW5EdFFncFpUdituVUE4MjJSRWMrYjlJUlM2RmlvMXA4eTcKTWFhdktKdmVhbmw0VzBrWVg1ZEhRbmJveWdHVHB1c0FSTVQrOW5kSjVzYWpRVE45OEJydGxsOWNrNFYyN2JCVAphNVFJdFBjT1lPS1NXbVpnN3ZiUHZnK0FrS1dPekQwSmRkZWk4SkViM09WUkdBYTQ4N1NveFF4WU1QcTlXbzRnCk9tWGxRY0lIdmJGZ0k4WXdaTC96NXNTTmp4WmgxNnZGY1IrdVFTUEp4MlhiamVtdWdaUCtQWTFyOVVWWXRHdWsKbnBYUTNMdnhlblFCTVV0dGZiNGx5eEZjUEZpYXg2b1ZqV3pHb2QxcTVqdDE3b3hCSXQyREpLMTlUaHdRMlVLUApUSHk3Y2hlanZmYlFNcXA0ZnJvdUFaaURqYkdQR1FJREFRQUJBb0lDQUJRWVlzTmtkc1k5emdHUGFIUTd3UjY0CmNldDhRdmlJeVloK096VFNkTEtqRFIyd3dmMFAxMS8wQ1dpSUhWVVJKM21EbmdZM2M3d3pYSEpEMTYwck9YemkKS05pblF5WEtWS2tnWFp1SVhvZi9LdzMzWWo2V21XZjRvUE9oY2RHdXBVYzR5bXl1UzQ0ZC8xMW1WNFF1MDc0Qwo4TlBHUjhML2tYazF3bWFUdTJaZjdWT0did1VXTy9XUTBoVGd0dnlPTW4zOVRzQkFaNmRTME5YYXpTczNZam1NCkphQW1qWXloV1NpekpJNVcwajc4MHBCS3huRFVRNVB0ZDIrQ2hiZGdHSWZMRWNWd0RuQmNydGVvejZsTGc0YjgKVzczcEFsWUNCU242V3hCU1pPTUhVM3M2c1VuWjdvMG82bEtkOVdhcXFIWEk5ejhKOGZDMEFPc3ZkWjd6OHJ4NQoxWVJiZ01YYkpGL1d2SGloUjZodjM4STdDYVlPVkJEL3c4N2d2dllDKzVoWjgrQUNvZld2bkl5am1paDJaY3JTClJEeGFaY0VSVFhldnpnenhLbnQwWi9nOHU2NlN2RGdJWUt1eUQ0c3dMUkJkTGh2R1o3MmY3eEQ0SUh6QXMxeE4KdGMvVkhvS1NzdGFDZk02SDZrbWh5SkFsSXZ4aWFmZWEvWThCOXlhV3g4Y0hkQ3ZzTUo2Y1Bvb0lQRGVpbTBYdQpKQ21KTzNGWUlFbnRaZzA3dmFTZjMwV2IvUFdVVkFLb0pHcmx6c2RTMTk2KzBJcXVlWW1tQU1Hb2NUbUlRWjgxCm5kbXRyTEFwNjRsbURHT2s5aWp0aDFtc1R2amlIdGJMQkgxNmpERFJpeThSRGxNUHlkb2V1aVV0ZXpqdFQ0dEgKNXJRaUdnVXMwbG9WbHlydWJ0MEJBb0lCQVFEYXNrS1FtZThNYk1tRWZGZXJNdDV0WUM4QmRzRnVYaVMzcy9NdQpnczJvV0Zma0lQUHZxRGlqV21DVHVXc0lTMGZzTU95K05WYm5LWnVXMHpzZ05xemZGTlFaU3RTcHl6TlFjdzlTCmErV0JveDZxbDlxZTFUeFVqWmlHbHdrOFdwd1BJTDhIcTU4bHJrMHlzbjZhM1h6ai8wbWp3WGQvOXc3UVRock4KNTM2cmpaN2JSM21wV0FROVh0VUxQNWZvMk1IZDE1YUYrd3VESldlVHJqK1IrUTk0eXpzU2ExZHhJZW1zSmtQMwpsOUx3SU8xYk9RTU9rRUR3RjdaZGJENDQrYTE3VkYwM0x4T0loNTBzUjU5THFqRTRBc2thVDRqa2JxS2U5ajBOCkxJUkRhTU1uUzFmU1hRQ29UbUR3bGlUckdOc2dhbzBQU3JKOWVEWjFYM2xrY1J3WkFvSUJBUURXQWJ0RWNwZngKSEJlb0sxbTJUZ1BEZlkyTVB0T2FzZ0Q1OEswMjRqWEd5N291Y0wwMVBsNzkvMFBtQklwK1JyV2hqcEtRdW55RApFenRuL0NpTGQrUGR0VkpldS9sN2lsdWY1R2VScmlWa2lpS3FiVEhZTkZObHM1RTNHOFRaZW5NLzdTdklobEs5CnphVDI0VkZ6TCtNYUFCWEp2VTZZTjl3V3N5TEhURHJRRzBoVHJFcGNSemRkeTdoOC85UU4vTjNBaWV4Mi9kbGkKTEpzbFg0UTBVVnV1VWgrOUk0K0s2aHNPMlBuSWQwMERiTnBEMlNOOXVjMDRoR1g1VHpWR0pzL1BvQmxFcHJ0ZgpJNlNaUlB3Vkl2WkltWEh4OU5DUW9sSElmUlZGTVhqMkFTNlhuS0RiZE85WHZQc3RBZ1dhZ3NvY0paMXNrVDdRCi9meWRLUzlHMG1zQkFvSUJBQ0I2bXVJb3lsUzVEMUNLdXVaay9wMlZ6RVZXWXJIR2I0T015US9lUXphK01BZGsKVVhZRk1Ld3A3dS9oZUtEWnRVdkJsRmRIU3FtNEJ6Qm1ISURUUGVjL2k2Ulo5YTFselRBa2RtRVNQeHA2cEVKSApuU003bmVNY3lFc3N3U1ZpZTR6UG15OURjTFpDNVpvaTRpU1R3a21HRDJTdmhkVE9WemZlY2FLa3Y2NHdzU2YxCnZIN0c0SkpRdENrZ2Y2b0lEdnFvV3VWNC9DTzArV1g0V2Q2Tzg1cEg3SFQyMWh5cUlhNzhXOW00aFk0K0JhSW4KbkdtY1NOaWZYT2tRKzBpdzQrL04vcTRFWXMxQy9yZWx4MldRV0JEdWNQbGtXSHM4WnhCZWw0Q09YUEk1NjhtNQpLY2pISVNMZHlRM1I3cGV2c0ZObkg1M214UTFYUGhjK1g2UG9ISGtDZ2dFQVE5MlN0SGNlcGhDQmxBd0RUQ1BiClg3QStKaDU2WGxGYXEraGVGY3lRdnpVMkdxb1g1bjJjQkRKaUp0eUR5dDNEbGJNdjJZTzZIcHNIdU1jbldHc3gKc01waWo3Wk92Slc0enJEUkEwclZndGVuZktKYUx6VVF5V3l6ZldWcC9JbXZhTE5lc2gyZXVhQXdVelpLN1J0Zgppb3hDWEpLVERRU1I0QVQ0MzNqV0ljNjFGZ3ZLSFE5Y2lIc2xTMGFaeWNISjFOZ29TK2ZlZXhxb0xLYm90dXFpCkIxcjF3N1kyUEJoWGNsTHVpMXNCNmpjbjFHSlV0ZmNwRkdZd0xHcW8rMUV0ajZzMnVDV2p2OXord3JnMHRNTTgKbFBOTVJpMmJ3bkluTzB3blphVDF0aFhUMzdLRTlITlZ2MTRuelRNWjhkRE9KVFRzZ2xSaE5rZUZSNVdhNzN1bApBUUtDQVFBUXp5R1cxMWk5N1FoaTRwODVCWG1neWVlT0RSK1pkOThIdlNOMzBlVElaZXgxajFWbU1hSUswZFM1CjRwR0U5N29xRmF6MUkwNmFNU2gzbkJCVVIxNDZMUk5jRXNERU14RjNVbVc1M28xZFQ2aEpGdGp6T3NYWnpicjUKaStYYnF2UkxhRG8rOWJtMHdWa1NUZVlENENnRjBPK1VpMlNWTnpiOFhZdVE5bDhJRXNBNlU1eVF0RjltZitGZQpjY3h6dm9MUnQ1OEtQS1hxY0RLYitmRjNQazQ3K3VXNTlvaUQxcmZ1MzRFbHlVN1RqQ0RrQzdKejRPYkZCamdXCkRQblJON1Y5MG0xSDNEWW1nL2NEYWVzVjgvME9CdUhQUWx0Q2F3Mk5NSFU5K3gvbnFyNk1KUU54MlpQcUh0dEIKclptN244OXlVZEpIL1dzM2Y0Zm15Q2pmOFNrRwotLS0tLUVORCBQUklWQVRFIEtFWS0tLS0tCg=='
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: registry-data-pvc
+  namespace: registry-system
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 32Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: registry
+  namespace: registry-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registry
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      tolerations:
+        - key: CriticalAddonsOnly
+          operator: Exists
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: registry
+          image: registry:2
+          ports:
+            - containerPort: 5000
+          env:
+            - name: REGISTRY_HTTP_TLS_CERTIFICATE
+              value: '/certs/tls.crt'
+            - name: REGISTRY_HTTP_TLS_KEY
+              value: '/certs/tls.key'
+          volumeMounts:
+            - name: registry-certs
+              mountPath: '/certs'
+              readOnly: true
+            - name: registry-data
+              mountPath: '/var/lib/registry'
+              subPath: registry
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+      volumes:
+        - name: registry-certs
+          secret:
+            secretName: registry-secret
+        - name: registry-data
+          persistentVolumeClaim:
+            claimName: registry-data-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry-service
+  namespace: registry-system
+spec:
+  type: LoadBalancer
+  selector:
+    app: registry
+  ports:
+    - name: registry-port
+      protocol: TCP
+      port: 5000
+      targetPort: 5000
+  loadBalancerIP: 192.168.2.199

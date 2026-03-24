@@ -3564,19 +3564,41 @@ EOF
   $SUDO chmod 600 "$_server_env_file"
 
   # Setup server
+  # tieni a mmente che _server_dir = /opt/recluster/server
   INFO "Setting up server"
   DEBUG "Installing server dependencies"
-  #$SUDO npm --prefix "$_server_dir" ci --ignore-scripts
-  $SUDO npm --prefix "$_server_dir" install --legacy-peer-deps --ignore-scripts
+  $SUDO npm --prefix "$_server_dir" ci --ignore-scripts
   yes | $SUDO cp --force "$_server_env_file" "$_server_dir/.env"
   DEBUG "Generating database assets"
-  $SUDO npm --prefix "$_server_dir" run db:generate
+  DEBUG "Siamo in $(pwd)"
+  _dir_prima_di_setup_server=$(pwd)
+  cd "$_server_dir"
+  # debug
+  DEBUG "Ora siamo in $(pwd)"
+  DEBUG "Contenuto .env:"
+  cat .env | grep DATABASE_URL || true
+  # carica env nel processo corrente
+  set -a
+  source .env
+  set +a
+  DEBUG "DATABASE_URL dopo source: $DATABASE_URL"
+
+  # check esplicito
+  if [ -z "$DATABASE_URL" ]; then
+    echo "ERROR: DATABASE_URL non definita"
+    exit 1
+  fi
+
+  $SUDO npm run db:generate
+  $SUDO npm run build
   INFO "Applying migrations to production database"
-  $SUDO npm --prefix "$_server_dir" run db:deploy
+  $SUDO npm run db:deploy
   DEBUG "Removing development dependencies"
-  $SUDO npm --prefix "$_server_dir" prune --production
+  $SUDO npm prune --production
   $SUDO rm -rf "$_server_dir/prisma"
   $SUDO rm -f "$_server_dir/.env"
+  cd _dir_prima_di_setup_server
+
 
   # Server service
   INFO "Constructing server service '$_server_service_name'"

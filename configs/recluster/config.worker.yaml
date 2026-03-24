@@ -20,52 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# THIS FILE IS GOING TO BE IDENTICAL AMONG EVERY NODE IN THE CLUSTER!
-# COMPILE IT ONCE AND SEND IT TO THE OTHER NODES VIA SCP OR SIMILAR
-
-k3s:
-  token: '4646f99bc4cbae3d5eceed856b337c9d3284be0d4056a3909f780c0c385fbf93'
-  #token: 'FDWPQOIR245439097yyuilkilufjwd083276TYOIYOULJKNFEP0FSAasd'
-  server:
-    host: '192.168.2.50'
-    port: 6443
-
-k8s:
-  loadbalancer:
-    ip:
-      from: '192.168.2.61'
-      to: '192.168.2.199'
-  registry:
-    mirror:
-      host: 'registry.recluster.local'
-      port: 5000
-    endpoint:
-      host: '192.168.2.199'
-      port: 5000
-    tls:
-      crt:
-        __:
-          run: |-
-            base64 -w 0 ./certs/registry.crt
-      key:
-        __:
-          run: |-
-            base64 -w 0 ./certs/registry.key
+kind: worker
 
 recluster:
-  server:
-    host: '192.168.2.50'
-    port: 8080
-    path: 'graphql'
-  database:
-    user: 'recluster'
-    password: 'strange-matrix'
-    host: 'localhost'
-    port: 5432
-    db: 'recluster'
-
-ssh:
-  authorized_key:
-    __:
-      run: |-
-        cat ./certs/ssh.crt
+  server: http://192.168.2.50:8080
